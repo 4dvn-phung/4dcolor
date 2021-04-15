@@ -10,7 +10,7 @@
       <title>4D Color Pick</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="./main.css">
+      <link rel="stylesheet" href="main.css">
       <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>     
     </head>
     <body>
@@ -34,6 +34,7 @@
       </div>
       <script>
         var colorPicker = new iro.ColorPicker('#picker', {
+          color: "#f00",
           layout: [
               { 
                 component: iro.ui.Wheel,
