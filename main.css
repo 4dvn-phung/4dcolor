@@ -1,0 +1,19 @@
+.gform {
+  text-align: center;
+}
+.gform button {
+  margin-top: 20px;
+}
+.wrap {
+  min-height: 100vh;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.wrap .half {
+  width: 50%;
+  padding: 32px 0;
+}
