@@ -4,51 +4,81 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>4D Color Pick</title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="main.css">
-      <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>     
-    </head>
-    <body>
-      <div class="wrap">
-        <div class="half">
-          <div id="picker"></div>
-          <form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec" data-email="phungnc@4digit.com">
-            <div>
-              <input id="colorInput" name="colorInput" type="hidden">
-              <button>この色に決定</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4D Color Pick</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="wrapper-description">
+        <p class="description">
+          Please pick the color of <br />FOURDIGIT that you feel. <br />Don’t
+          think, just feel!
+        </p>
+      </div>
+      <div id="simulation" class="container">
+        <div class="wrapper-inner">
+          <div class="inner">
+            <div class="wrapper-picker">
+              <div id="picker"></div>
+              <div class="message">
+                <h2 class="message-text">Thank you!</h2>
+              </div>
             </div>
-            <div style="display:none" class="thankyou_message">
-              <h2><em>Thanks</em></h2>
-            </div>
-          </form>
-        </div>
-        <div class="half" id="simulation">
-          <h1>FOURDIGIT</h1>
-          <p>Design&Tech <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed porttitor leo, sit amet bibendum enim. Duis efficitur dui vitae tincidunt rutrum. </p>
+            <form
+              class="gform"
+              method="POST"
+              action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
+              data-email="phungnc@4digit.com"
+            >
+              <input id="colorInput" name="colorInput" type="hidden" />
+              <div id="fSubmitConfirm" class="wrapper-button">
+                <button id="submitConfirm" type="button" disabled>
+                  Submit
+                </button>
+              </div>
+              <div id="fConfirm" class="wrapper-button">
+                <button id="fButtonCancel" type="button">Cancel</button>
+                <button type="submit">OK</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      <script>
-        var colorPicker = new iro.ColorPicker('#picker', {
-          color: "#f00",
-          layout: [
-              { 
-                component: iro.ui.Wheel,
-              }
-            ]
-        });
-        var colorPick = document.getElementById("colorInput");
-        var colorSimulation = document.getElementById("simulation");
-        colorPicker.on(["color:init", "color:change"], function(color){
-          colorPick.value = color.rgbString;
-          colorSimulation.style.color = color.rgbString;
-        });
-      </script>
-      <!-- Submit the Form to Google Using "AJAX" -->
-      <script data-cfasync="false" type="text/javascript" src="./form-submission-handler.js"></script>
-    </body>
+    </div>
+    <script>
+      var colorPicker = new iro.ColorPicker("#picker", {
+        color: "#f00",
+        layout: [
+          {
+            component: iro.ui.Box,
+            options: {
+              width: 300,
+              borderWidth: 10,
+            },
+          },
+        ],
+      });
+      var colorPick = document.getElementById("colorInput");
+      var colorSimulation = document.getElementById("simulation");
+      colorPicker.on(["color:init", "color:change"], function (color) {
+        colorPick.value = color.rgbString;
+        colorSimulation.style.backgroundColor = color.rgbString;
+      });
+      colorPicker.on(["color:change"], function (color) {
+        document.getElementById("submitConfirm").disabled = false;
+      });
+    </script>
+    <!-- Submit the Form to Google Using "AJAX" -->
+    <script
+      data-cfasync="false"
+      type="text/javascript"
+      src="./assets/js/form-submission-handler.js"
+    ></script>
+  </body>
 </html>

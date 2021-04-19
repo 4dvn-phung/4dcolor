@@ -4,40 +4,41 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>4D Color Pick Result</title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="main.css">
-      <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>     
-    </head>
-    <body>
-      <div class="wrap" style="flex-direction:column">
-        <h1>4D 色</h1>
-        <div id="picker_result"></div>
-      </div>
-      <script>
-        let url = 'https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses';
-        fetch(url)
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4D Color Pick Result</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  </head>
+  <body>
+    <div class="wrap" style="flex-direction: column">
+      <h1>4D 色</h1>
+      <div id="picker_result"></div>
+    </div>
+    <script>
+      let url =
+        "https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses";
+      fetch(url)
         .then((response) => response.json())
-        .then(json => {
+        .then((json) => {
           // Do something with the data
           console.log(json.responses);
-          var cls = json.responses.map(c => c.colorInput);
+          var cls = json.responses.map((c) => c.colorInput);
           const colorPickerResult = new iro.ColorPicker("#picker_result", {
             width: 300,
             colors: cls,
             handleRadius: 3,
             borderWidth: 1,
             layout: [
-              { 
+              {
                 component: iro.ui.Wheel,
-              }
-            ]
-          });          
+              },
+            ],
+          });
         });
-      </script>
-    </body>
+    </script>
+  </body>
 </html>

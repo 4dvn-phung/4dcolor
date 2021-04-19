@@ -1,0 +1,111 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Termina", "Helvetica", sans-serif;
+}
+.gform {
+  text-align: center;
+  width: 100%;
+}
+.gform button {
+  font-family: "Termina", "Helvetica", sans-serif;
+  background-color: rgba(255, 255, 255, 95%);
+  appearance: none;
+  border: 0;
+  padding: 12px;
+  width: 100%;
+  margin: 0 10px;
+  max-width: 240px;
+  cursor: pointer;
+}
+#fConfirm {
+  display: none;
+}
+.message {
+  font-family: "Termina", "Helvetica", sans-serif;
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 90%);
+}
+.message-text {
+  font-size: 20px;
+}
+.wrapper-button {
+  display: flex;
+  padding: 0 20px;
+  margin-top: 20px;
+  justify-content: center;
+}
+.wrapper-picker {
+  position: relative;
+}
+.wrap {
+  background-color: #cfcdc9;
+  min-height: calc(100vh - 50px);
+  padding: 25px 30px;
+  position: relative;
+}
+.wrapper-description {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.description {
+  font-size: 12px;
+  color: #fff;
+}
+.container {
+  max-width: 1000px;
+  height: 0;
+  width: 100%;
+  padding-bottom: 43.48%;
+  margin: 0 auto;
+  position: relative;
+  background-image: url("../images/background_pc.png");
+  background-size: cover;
+  background-color: #00486e;
+  border-radius: 10px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
+}
+.wrapper-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper-button {
+    margin-top: 15px;
+  }
+  .wrapper-description {
+    margin-bottom: 0;
+    position: absolute;
+    top: 50%;
+    right: -16.34%;
+    transform: rotate(90deg) translateY(-10.2em);
+  }
+  .description br {
+    display: none;
+  }
+  .container {
+    background-image: url("../images/background_sp.png");
+    padding-bottom: 0;
+    height: calc(100vh - 50px);
+    border-radius: 15px;
+  }
+}
