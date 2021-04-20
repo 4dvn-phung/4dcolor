@@ -65,6 +65,7 @@
 
     disableAllButtons(form);
     var url = form.action;
+
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     // xhr.withCredentials = true;

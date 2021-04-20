@@ -38,7 +38,7 @@
             <input id="colorInput" name="colorInput" type="hidden" />
             <input id="colorCoordinate" name="colorCoordinate" type="hidden" />
             <div id="fSubmitConfirm" class="wrapper-button">
-              <button id="submitConfirm" type="button">
+              <button id="submitConfirm" type="button" disabled>
                 Submit
               </button>
             </div>
@@ -59,13 +59,14 @@
     const colorPick = document.getElementById("colorInput");
     const colorCoordinate = document.getElementById("colorCoordinate");
     const colorSimulation = document.getElementById("simulation");
-    // colorSimulation.style.backgroundColor = '#00486e';
+    colorSimulation.style.backgroundColor = '#00486e';
 
     picker.onChange(function (colorData) {
-      console.log(colorData.color);
+      console.log(colorData);
       colorPick.value = colorData.color;
       colorCoordinate.value = colorData.coordinate;
       colorSimulation.style.backgroundColor = colorData.color;
+      document.getElementById("submitConfirm").disabled = false;
     })
   </script>
   <!-- Submit the Form to Google Using "AJAX" -->
