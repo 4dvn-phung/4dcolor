@@ -59,11 +59,17 @@ body {
   min-height: calc(100vh - 50px);
   padding: 25px 30px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .wrapper-description {
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
+  align-self: flex-end;
+  width: 100%;
 }
 .description {
   font-size: 12px;
@@ -71,9 +77,10 @@ body {
 }
 .container {
   max-width: 1000px;
-  height: 0;
+  height: 80.10680907877169vh;
   width: 100%;
-  padding-bottom: 43.48%;
+  max-height: 600px;
+  align-self: flex-start;
   margin: 0 auto;
   position: relative;
   background-image: url("../images/background_pc.png");
@@ -110,24 +117,33 @@ body {
   opacity: 0;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 768px) {
   .wrapper-button {
     margin-top: 15px;
   }
   .wrapper-description {
+    margin-top: 50%;
     margin-bottom: 0;
     position: absolute;
     top: 50%;
-    right: -16.34%;
-    transform: rotate(90deg) translateY(-10.2em);
+    right: 15px;
+    transform: rotate(90deg);
+    transform-origin: right center;
+  }
+  .description {
+    white-space: nowrap;
+  }
+  .wrapper-picker {
+    width: 220px;
+    height: 220px;
   }
   .description br {
     display: none;
   }
   .container {
     background-image: url("../images/background_sp.png");
-    padding-bottom: 0;
     height: calc(100vh - 50px);
-    border-radius: 15px;
+    max-height: none;
+    border-radius: 25px;
   }
 }
