@@ -101,19 +101,35 @@
     var message = document.querySelector(".message");
     var messageText = document.querySelector(".message-text");
     var buttonSubmitConfirm = document.getElementById("submitConfirm");
+    var formSubmitConfirm = document.getElementById("fSubmitConfirm");
+    var formConfirm = document.getElementById("fConfirm");
     buttonSubmitConfirm.addEventListener("click", function () {
       if (!buttonSubmitConfirm.disabled) {
-        message.style.display = "flex";
         messageText.innerHTML = "Are you sure?";
-        document.getElementById("fSubmitConfirm").style.display = "none";
-        document.getElementById("fConfirm").style.display = "flex";
+        message.style.display = "flex";
+        formSubmitConfirm.style.opacity = 0;
+        formSubmitConfirm.style.transform = "scale(0)";
+        formConfirm.style.opacity = 1;
+        formConfirm.style.transform = "scale(1)";
+        setTimeout(function () {
+          message.style.opacity = 1;
+          formSubmitConfirm.style.display = "none";
+          formConfirm.style.display = "flex";
+        }, 310);
       }
     });
     var buttonConfirmCancel = document.getElementById("fButtonCancel");
     buttonConfirmCancel.addEventListener("click", function () {
-      document.getElementById("fSubmitConfirm").style.display = "block";
-      document.getElementById("fConfirm").style.display = "none";
-      message.style.display = "none";
+      message.style.opacity = 0;
+      formConfirm.style.opacity = 0;
+      formConfirm.style.transform = "scale(0)";
+      formSubmitConfirm.style.opacity = 1;
+      formSubmitConfirm.style.transform = "scale(1)";
+      setTimeout(function () {
+        message.style.display = "none";
+        formSubmitConfirm.style.display = "block";
+        formConfirm.style.display = "none";
+      }, 310);
     });
   }
   document.addEventListener("DOMContentLoaded", loaded, false);

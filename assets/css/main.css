@@ -34,6 +34,8 @@ body {
   left: 0;
   right: 0;
   background-color: rgba(255, 255, 255, 90%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 .message-text {
   font-size: 20px;
@@ -96,6 +98,16 @@ body {
 .page-heading {
   text-align: center;
   margin-bottom: 25px;
+}
+#fSubmitConfirm,
+#fConfirm {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#fSubmitConfirm {
+  opacity: 1;
+}
+#fConfirm {
+  opacity: 0;
 }
 
 @media screen and (max-width: 640px) {
