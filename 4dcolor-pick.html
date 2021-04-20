@@ -12,19 +12,19 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css">
-  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  <script type="text/javascript" src="./libs/color-picker.js"></script>
 </head>
 
 <body>
   <div class="wrap">
     <div class="half">
-      <div id="picker"></div>
       <canvas id="color-picker"></canvas>
       <form class="gform" method="POST"
         action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
         data-email="phungnc@4digit.com">
         <div>
           <input id="colorInput" name="colorInput" type="hidden">
+          <input id="colorCoordinate" name="colorCoordinate" type="hidden">
           <button>この色に決定</button>
         </div>
         <div style="display:none" class="thankyou_message">
@@ -38,31 +38,20 @@
         amet bibendum enim. Duis efficitur dui vitae tincidunt rutrum. </p>
     </div>
   </div>
-  <script type="text/javascript" src="./libs/color-picker.js"></script>
 </body>
 <script>
-  // let colorPicker = new iro.ColorPicker('#picker', {
-  //   color: "#f00",
-  //   layout: [
-  //     {
-  //       component: iro.ui.Wheel,
-  //     }
-  //   ]
-  // });
-  // let colorPick = document.getElementById("colorInput");
-  // let colorSimulation = document.getElementById("simulation");
-  // colorPicker.on(["color:init", "color:change"], function (color) {
-  //   colorPick.value = color;
-  //   colorSimulation.style.color = color.rgbString;
-  // });
+
   let picker = new Picker(document.getElementById('color-picker'));
   picker.draw();
   let colorPick = document.getElementById("colorInput");
+  let colorCoordinate = document.getElementById("colorCoordinate");
   let colorSimulation = document.getElementById("simulation");
-  
-  picker.onChange(function (color) {
-    colorPick.value = color;
-    colorSimulation.style.color = color;
+
+  picker.onChange(function (colorData) {
+    console.log(colorData.color);
+    colorPick.value = colorData.color;
+    colorCoordinate.value = colorData.coordinate;
+    colorSimulation.style.color = colorData.color;
   })
 
 </script>
