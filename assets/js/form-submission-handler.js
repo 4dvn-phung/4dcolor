@@ -70,15 +70,16 @@
     // xhr.withCredentials = true;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
+      if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 300)) {
         form.reset();
         var formElements = form.querySelector('.form-elements');
         if (formElements) {
           formElements.style.display = 'none'; // hide form
         }
-        var thankYouMessage = form.querySelector('.thankyou_message');
-        if (thankYouMessage) {
-          thankYouMessage.style.display = 'block';
+        var message = form.querySelector('.message');
+        if (message) {
+          messageText.innerHTML = 'Thank you!';
+          message.style.display = 'flex';
         }
       }
     };
@@ -97,7 +98,41 @@
     for (var i = 0; i < forms.length; i++) {
       forms[i].addEventListener('submit', handleFormSubmit, false);
     }
+    var message = document.querySelector('.message');
+    var messageText = document.querySelector('.message-text');
+    var buttonSubmitConfirm = document.getElementById('submitConfirm');
+    var formSubmitConfirm = document.getElementById('fSubmitConfirm');
+    var formConfirm = document.getElementById('fConfirm');
+    buttonSubmitConfirm.addEventListener('click', function () {
+      if (!buttonSubmitConfirm.disabled) {
+        messageText.innerHTML = 'Are you sure?';
+        message.style.display = 'flex';
+        formSubmitConfirm.style.opacity = 0;
+        formSubmitConfirm.style.transform = 'scale(0)';
+        formConfirm.style.opacity = 1;
+        formConfirm.style.transform = 'scale(1)';
+        setTimeout(function () {
+          message.style.opacity = 1;
+          formSubmitConfirm.style.display = 'none';
+          formConfirm.style.display = 'flex';
+        }, 310);
+      }
+    });
+    var buttonConfirmCancel = document.getElementById('fButtonCancel');
+    buttonConfirmCancel.addEventListener('click', function () {
+      message.style.opacity = 0;
+      formConfirm.style.opacity = 0;
+      formConfirm.style.transform = 'scale(0)';
+      formSubmitConfirm.style.opacity = 1;
+      formSubmitConfirm.style.transform = 'scale(1)';
+      setTimeout(function () {
+        message.style.display = 'none';
+        formSubmitConfirm.style.display = 'block';
+        formConfirm.style.display = 'none';
+      }, 310);
+    });
   }
+
   document.addEventListener('DOMContentLoaded', loaded, false);
 
   function disableAllButtons(form) {

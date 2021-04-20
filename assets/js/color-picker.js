@@ -33,12 +33,16 @@ window.Picker = (function () {
       //Circle
       this.colors.forEach((colorXY) => {
         if (Array.isArray(colorXY)) {
-          this.drawCircle({ x: colorXY[0], y: colorXY[1], size: 1 });
+          this.drawCircle({
+            x: +colorXY[0],
+            y: +colorXY[1],
+            size: 1,
+          });
         }
       });
     }
 
-    drawCircle({ x, y, size }) {
+    drawCircle({ x, y, size = 1 }) {
       this.context.beginPath();
       this.context.arc(x, y, size + 2, 0, Math.PI * 2);
       this.context.strokeStyle = 'black';
@@ -82,17 +86,20 @@ window.Picker = (function () {
 
     listenForEvents() {
       const onMouseDown = (e) => {
-        let currentX = e.clientX - this.target.offsetLeft;
-        let currentY = e.clientY - this.target.offsetTop;
+        let currentX = e.layerX;
+        let currentY = e.layerY;
         this.pickerCircle.x = currentX;
         this.pickerCircle.y = currentY;
-        this.onChangeCallback(this.getPickedColor());
-        this.build();
-        this.drawCircle({
-          x: this.pickerCircle.x,
-          y: this.pickerCircle.y,
-          size: this.pickerCircle.size,
-        });
+
+        if (this.onChangeCallback) {
+          this.onChangeCallback(this.getPickedColor());
+          this.build();
+          this.drawCircle({
+            x: currentX,
+            y: currentY,
+            size: this.pickerCircle.size,
+          });
+        }
       };
 
       // const onMouseMove = (e) => {

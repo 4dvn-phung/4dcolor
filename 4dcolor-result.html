@@ -6,28 +6,36 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4D Color Pick Result</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="main.css">
-  <script type="text/javascript" src="./libs/color-picker.js"></script>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script type="text/javascript" src="./assets/js/color-picker.js"></script>
 </head>
 
 <body>
-  <div class="wrap" style="flex-direction:column">
-    <h1>4D 色</h1>
-    <canvas id="picker_result"></canvas>
+  <div class="wrap">
+    <h1 class="page-heading">4D 色</h1>
+    <div id="simulation" class="container">
+      <div class="wrapper-inner">
+        <div class="inner">
+          <div class="wrapper-picker">
+            <canvas id="picker_result" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <script>
-    let url = 'https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses';
+    let url =
+      "https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses";
     fetch(url)
       .then((response) => response.json())
-      .then(json => {
+      .then((json) => {
         // Do something with the data
-        console.log(json.responses);
-        const cls = json.responses.filter(color => color.colorCoordinate).map(color => color.colorCoordinate.split(','));
+        const cls = json.responses.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(","));
         const picker = new Picker(document.getElementById('picker_result'), {
           colors: cls
         });
