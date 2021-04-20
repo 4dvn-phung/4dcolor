@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="./libs/color-picker.js"></script>
+    <script type="text/javascript" src="./assets/libs/color-picker.js"></script>
     <script>
       let picker = new Picker(document.getElementById("color-picker"));
       picker.draw();
@@ -60,30 +60,9 @@
 
       picker.onChange(function (color) {
         colorPick.value = color;
-        colorSimulation.style.color = color;
+        colorSimulation.style.backgroundColor = color;
         document.getElementById("submitConfirm").disabled = false;
       });
-      // var colorPicker = new iro.ColorPicker("#picker", {
-      //   color: "#f00",
-      //   layout: [
-      //     {
-      //       component: iro.ui.Box,
-      //       options: {
-      //         width: 300,
-      //         borderWidth: 10,
-      //       },
-      //     },
-      //   ],
-      // });
-      // var colorPick = document.getElementById("colorInput");
-      // var colorSimulation = document.getElementById("simulation");
-      // colorPicker.on(["color:init", "color:change"], function (color) {
-      //   colorPick.value = color.rgbString;
-      //   colorSimulation.style.backgroundColor = color.rgbString;
-      // });
-      // colorPicker.on(["color:change"], function (color) {
-      //   document.getElementById("submitConfirm").disabled = false;
-      // });
     </script>
     <!-- Submit the Form to Google Using "AJAX" -->
     <script
