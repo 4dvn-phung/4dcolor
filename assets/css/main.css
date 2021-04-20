@@ -79,6 +79,7 @@ body {
   background-color: #00486e;
   border-radius: 10px;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
+  transition: background-color 0.3s linear;
 }
 .wrapper-inner {
   display: flex;
