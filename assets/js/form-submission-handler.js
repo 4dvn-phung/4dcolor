@@ -113,6 +113,7 @@
     buttonConfirmCancel.addEventListener("click", function () {
       document.getElementById("fSubmitConfirm").style.display = "block";
       document.getElementById("fConfirm").style.display = "none";
+      message.style.display = "none";
     });
   }
   document.addEventListener("DOMContentLoaded", loaded, false);
