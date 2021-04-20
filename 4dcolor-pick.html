@@ -4,70 +4,70 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>4D Color Pick</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="main.css">
-  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-</head>
-
-<body>
-  <div class="wrap">
-    <div class="half">
-      <div id="picker"></div>
-      <canvas id="color-picker"></canvas>
-      <form class="gform" method="POST"
-        action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
-        data-email="phungnc@4digit.com">
-        <div>
-          <input id="colorInput" name="colorInput" type="hidden">
-          <button>この色に決定</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4D Color Pick</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="wrapper-description">
+        <p class="description">
+          Please pick the color of <br />FOURDIGIT that you feel. <br />Don’t
+          think, just feel!
+        </p>
+      </div>
+      <div id="simulation" class="container">
+        <div class="wrapper-inner">
+          <div class="inner">
+            <div class="wrapper-picker">
+              <canvas id="color-picker"></canvas>
+              <div class="message">
+                <h2 class="message-text">Thank you!</h2>
+              </div>
+            </div>
+            <form
+              class="gform"
+              method="POST"
+              action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
+              data-email="phungnc@4digit.com"
+            >
+              <input id="colorInput" name="colorInput" type="hidden" />
+              <div id="fSubmitConfirm" class="wrapper-button">
+                <button id="submitConfirm" type="button" disabled>
+                  Submit
+                </button>
+              </div>
+              <div id="fConfirm" class="wrapper-button">
+                <button id="fButtonCancel" type="button">Cancel</button>
+                <button type="submit">OK</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div style="display:none" class="thankyou_message">
-          <h2><em>Thanks</em></h2>
-        </div>
-      </form>
+      </div>
     </div>
-    <div class="half" id="simulation">
-      <h1>FOURDIGIT</h1>
-      <p>Design&Tech <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed porttitor leo, sit
-        amet bibendum enim. Duis efficitur dui vitae tincidunt rutrum. </p>
-    </div>
-  </div>
-  <script type="text/javascript" src="./libs/color-picker.js"></script>
-</body>
-<script>
-  // let colorPicker = new iro.ColorPicker('#picker', {
-  //   color: "#f00",
-  //   layout: [
-  //     {
-  //       component: iro.ui.Wheel,
-  //     }
-  //   ]
-  // });
-  // let colorPick = document.getElementById("colorInput");
-  // let colorSimulation = document.getElementById("simulation");
-  // colorPicker.on(["color:init", "color:change"], function (color) {
-  //   colorPick.value = color;
-  //   colorSimulation.style.color = color.rgbString;
-  // });
-  let picker = new Picker(document.getElementById('color-picker'));
-  picker.draw();
-  let colorPick = document.getElementById("colorInput");
-  let colorSimulation = document.getElementById("simulation");
-  
-  picker.onChange(function (color) {
-    colorPick.value = color;
-    colorSimulation.style.color = color;
-  })
+    <script type="text/javascript" src="./assets/libs/color-picker.js"></script>
+    <script>
+      let picker = new Picker(document.getElementById("color-picker"));
+      picker.draw();
+      let colorPick = document.getElementById("colorInput");
+      let colorSimulation = document.getElementById("simulation");
 
-</script>
-<!-- Submit the Form to Google Using "AJAX" -->
-<script data-cfasync="false" type="text/javascript" src="./form-submission-handler.js"></script>
-</body>
-
+      picker.onChange(function (color) {
+        colorPick.value = color;
+        colorSimulation.style.backgroundColor = color;
+        document.getElementById("submitConfirm").disabled = false;
+      });
+    </script>
+    <!-- Submit the Form to Google Using "AJAX" -->
+    <script
+      data-cfasync="false"
+      type="text/javascript"
+      src="./assets/js/form-submission-handler.js"
+    ></script>
+  </body>
 </html>
