@@ -6,7 +6,7 @@
 
     var fields = Object.keys(elements)
       .filter(function (k) {
-        if (elements[k].name === 'honeypot') {
+        if (elements[k].name === "honeypot") {
           honeypot = elements[k].value;
           return false;
         }
@@ -40,14 +40,14 @@
             data.push(item.value);
           }
         }
-        formData[name] = data.join(', ');
+        formData[name] = data.join(", ");
       }
     });
 
     // add form-specific values into the data
     formData.formDataNameOrder = JSON.stringify(fields);
-    formData.formGoogleSheetName = form.dataset.sheet || 'responses'; // default sheet name
-    formData.formGoogleSendEmail = form.dataset.email || ''; // no email by default
+    formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
+    formData.formGoogleSendEmail = form.dataset.email || ""; // no email by default
 
     return { data: formData, honeypot: honeypot };
   }
@@ -58,6 +58,7 @@
     var form = event.target;
     var formData = getFormData(form);
     var data = formData.data;
+    var message = document.querySelector(".message");
     // If a honeypot field is filled, assume it was done so by a spam bot.
     if (formData.honeypot) {
       return false;
@@ -66,81 +67,81 @@
     disableAllButtons(form);
     var url = form.action;
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
+    messageText.innerHTML = "Sending";
+    xhr.open("POST", url);
     // xhr.withCredentials = true;
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         form.reset();
-        var formElements = form.querySelector('.form-elements');
+        var formElements = form.querySelector(".form-elements");
         if (formElements) {
-          formElements.style.display = 'none'; // hide form --- not working
+          formElements.style.display = "none"; // hide form --- not working
         }
-      
-        var formConfirm = document.getElementById('fConfirm');
-        var message = document.querySelector('.message');
-        var messageText = document.querySelector('.message-text');
+
+        var formConfirm = document.getElementById("fConfirm");
+        var messageText = document.querySelector(".message-text");
         if (message) {
-          messageText.innerHTML = 'Thank you!';
-          message.style.display = 'flex';
+          messageText.innerHTML = "Thank you!";
+          message.style.display = "flex";
         }
-        formConfirm.style.display = 'none'; // hide form
+        formConfirm.style.display = "none"; // hide form
       }
     };
     // url encode form data for sending as post data
     var encoded = Object.keys(data)
       .map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
       })
-      .join('&');
+      .join("&");
     xhr.send(encoded);
   }
 
   function loaded() {
     // bind to the submit event of our form
-    var forms = document.querySelectorAll('form.gform');
+    var forms = document.querySelectorAll("form.gform");
     for (var i = 0; i < forms.length; i++) {
-      forms[i].addEventListener('submit', handleFormSubmit, false);
+      forms[i].addEventListener("submit", handleFormSubmit, false);
     }
-    var message = document.querySelector('.message');
-    var messageText = document.querySelector('.message-text');
-    var buttonSubmitConfirm = document.getElementById('submitConfirm');
-    var formSubmitConfirm = document.getElementById('fSubmitConfirm');
-    var formConfirm = document.getElementById('fConfirm');
-    buttonSubmitConfirm.addEventListener('click', function () {
+    var message = document.querySelector(".message");
+    var messageText = document.querySelector(".message-text");
+    var buttonSubmitConfirm = document.getElementById("submitConfirm");
+    var formSubmitConfirm = document.getElementById("fSubmitConfirm");
+    var formConfirm = document.getElementById("fConfirm");
+    buttonSubmitConfirm.addEventListener("click", function () {
       if (!buttonSubmitConfirm.disabled) {
-        messageText.innerHTML = 'Are you sure?';
-        message.style.display = 'flex';
+        messageText.innerHTML = "Are you sure?";
+        message.style.display = "flex";
         formSubmitConfirm.style.opacity = 0;
-        formSubmitConfirm.style.transform = 'scale(0)';
+        formSubmitConfirm.style.transform = "scale(0)";
         formConfirm.style.opacity = 1;
-        formConfirm.style.transform = 'scale(1)';
+        formConfirm.style.transform = "scale(1)";
         setTimeout(function () {
           message.style.opacity = 1;
-          formSubmitConfirm.style.display = 'none';
-          formConfirm.style.display = 'flex';
+          formSubmitConfirm.style.display = "none";
+          formConfirm.style.display = "flex";
         }, 310);
       }
     });
-    var buttonConfirmCancel = document.getElementById('fButtonCancel');
-    buttonConfirmCancel.addEventListener('click', function () {
+    var buttonConfirmCancel = document.getElementById("fButtonCancel");
+    buttonConfirmCancel.addEventListener("click", function () {
       message.style.opacity = 0;
       formConfirm.style.opacity = 0;
-      formConfirm.style.transform = 'scale(0)';
+      formConfirm.style.transform = "scale(0)";
       formSubmitConfirm.style.opacity = 1;
-      formSubmitConfirm.style.transform = 'scale(1)';
+      formSubmitConfirm.style.transform = "scale(1)";
       setTimeout(function () {
-        message.style.display = 'none';
-        formSubmitConfirm.style.display = 'block';
-        formConfirm.style.display = 'none';
+        message.style.display = "none";
+        formSubmitConfirm.style.display = "block";
+        formConfirm.style.display = "none";
       }, 310);
     });
   }
 
-  document.addEventListener('DOMContentLoaded', loaded, false);
+  document.addEventListener("DOMContentLoaded", loaded, false);
 
   function disableAllButtons(form) {
-    var buttons = form.querySelectorAll('button');
+    var buttons = form.querySelectorAll("button");
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].disabled = true;
     }

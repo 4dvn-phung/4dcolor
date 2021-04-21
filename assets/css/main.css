@@ -18,6 +18,8 @@ body {
   width: 100%;
   margin: 0 10px;
   max-width: 240px;
+}
+.gform button:not([disabled]) {
   cursor: pointer;
 }
 #fConfirm {
