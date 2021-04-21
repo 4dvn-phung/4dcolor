@@ -30,13 +30,12 @@
   </div>
   <script>
     let url =
-      // "https://api.sheety.co/01b1097974ec5591a4e7ffc77490e676/4DColorVoteResult/responses";
-      "http://gsx2json.com/api?id=1MRBOBX8sO1K5rwuC0oGFbKeca9wxZGS7EAp_Wdd9BaY&sheet=1";
+      "https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses";
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         // Do something with the data
-        const cls = json.rows.filter(color => color.colorcoordinate).map(color => String(color.colorcoordinate).split(";"));
+        const cls = json.responses.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(","));
         const picker = new Picker(document.getElementById('picker_result'), {
           colors: cls
         });
