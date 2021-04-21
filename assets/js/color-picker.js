@@ -127,7 +127,7 @@ window.Picker = (function () {
       );
       return {
         color: `rgb(${imageData.data[0]}, ${imageData.data[1]}, ${imageData.data[2]})`,
-        coordinate: `${this.pickerCircle.x},${this.pickerCircle.y}`,
+        coordinate: `${this.pickerCircle.x};${this.pickerCircle.y}`,
       };
     }
 

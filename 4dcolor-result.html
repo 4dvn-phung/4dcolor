@@ -35,7 +35,7 @@
       .then((response) => response.json())
       .then((json) => {
         // Do something with the data
-        const cls = json.responses.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(","));
+        const cls = json.responses.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(";"));
         const picker = new Picker(document.getElementById('picker_result'), {
           colors: cls
         });

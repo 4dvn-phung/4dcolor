@@ -66,31 +66,30 @@
     disableAllButtons(form);
     var url = form.action;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    // xhr.withCredentials = true;
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 300)) {
-        form.reset();
-        var formElements = form.querySelector('.form-elements');
-        if (formElements) {
-          formElements.style.display = 'none'; // hide form
-        }
-        var message = form.querySelector('.message');
-        if (message) {
-          messageText.innerHTML = 'Thank you!';
-          message.style.display = 'flex';
-        }
-      }
-    };
-    // url encode form data for sending as post data
     var encoded = Object.keys(data)
       .map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
       })
       .join('&');
-    xhr.send(encoded);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: encoded,
+    }).then(() => {
+      form.reset();
+      var formElements = form.querySelector('.form-elements');
+      if (formElements) {
+        formElements.style.display = 'none'; // hide form
+      }
+      var message = form.querySelector('.message');
+      if (message) {
+        messageText.innerHTML = 'Thank you!';
+        message.style.display = 'flex';
+      }
+    })
   }
 
   function loaded() {
