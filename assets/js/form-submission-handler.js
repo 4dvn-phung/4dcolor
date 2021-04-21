@@ -59,6 +59,7 @@
     var formData = getFormData(form);
     var data = formData.data;
     var message = document.querySelector(".message");
+    var messageText = document.querySelector(".message-text");
     // If a honeypot field is filled, assume it was done so by a spam bot.
     if (formData.honeypot) {
       return false;
@@ -80,7 +81,6 @@
         }
 
         var formConfirm = document.getElementById("fConfirm");
-        var messageText = document.querySelector(".message-text");
         if (message) {
           messageText.innerHTML = "Thank you!";
           message.style.display = "flex";
