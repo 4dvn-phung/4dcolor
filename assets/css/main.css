@@ -129,6 +129,18 @@ body {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+.ellipsis {
+  width: 16px;
+  display: none;
+}
+.ellipsis:after {
+  display: inline-block;
+  vertical-align: bottom;
+  content: "…";
+  width: 0px;
+  overflow: hidden;
+  animation: 900ms steps(4) 0s infinite normal none running ellipsis;
+}
 .spinner {
   width: 100%;
   height: 100%;
@@ -215,6 +227,11 @@ body {
   }
   100% {
     opacity: 0;
+  }
+}
+@keyframes ellipsis {
+  to {
+    width: 100%;
   }
 }
 
