@@ -236,6 +236,9 @@ body {
   .description br {
     display: none;
   }
+  #color-picker {
+    width: 100%;
+  }
   .container {
     background-image: url("../images/background_sp@2x.png");
     padding-bottom: 0;
