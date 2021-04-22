@@ -30,12 +30,13 @@
   </div>
   <script>
     let url =
-      "https://api.sheety.co/6961d020dc8005d8d55425a9f2790547/colorVoter/responses";
+      "https://sheet.best/api/sheets/eaab0685-5d64-4d70-92fc-32f1c3f4b11c";
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         // Do something with the data
-        const cls = json.responses.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(","));
+        const cls = json.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(";"));
+        console.log(cls)
         const picker = new Picker(document.getElementById('picker_result'), {
           colors: cls
         });
