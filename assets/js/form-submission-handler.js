@@ -65,6 +65,7 @@
       return false;
     }
 
+    resetPicker();
     disableAllButtons(form);
     var url = form.action;
     var xhr = new XMLHttpRequest();
@@ -136,6 +137,11 @@
         formConfirm.style.display = "none";
       }, 310);
     });
+  }
+
+  function resetPicker() {
+    const picker = new Picker(document.getElementById('color-picker'));
+    picker.draw();
   }
 
   document.addEventListener("DOMContentLoaded", loaded, false);
