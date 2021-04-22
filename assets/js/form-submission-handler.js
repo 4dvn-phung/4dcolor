@@ -88,9 +88,6 @@
         }
         formConfirm.style.opacity = 0;
         formConfirm.style.transform = "scale(0)";
-        setTimeout(function () {
-          formConfirm.style.display = "none"; // hide form
-        }, 310);
       }
     };
     // url encode form data for sending as post data

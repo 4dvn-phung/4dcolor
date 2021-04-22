@@ -4,45 +4,66 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4D Color Pick Result</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script type="text/javascript" src="./assets/js/color-picker.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4D Color Pick Result</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <script type="text/javascript" src="./assets/js/color-picker.js"></script>
-</head>
-
-<body>
-  <div class="wrap">
-    <h1 class="page-heading">4D 色</h1>
-    <div id="simulation" class="container">
-      <div class="wrapper-inner">
-        <div class="inner">
-          <div class="wrapper-picker">
-            <canvas id="picker_result" />
+  <body>
+    <div class="wrap">
+      <h1 class="page-heading">4D 色</h1>
+      <div id="simulation" class="container">
+        <div class="wrapper-inner">
+          <div class="inner">
+            <div class="wrapper-picker">
+              <div id="spinner" class="wrapper-spinner">
+                <div class="spinner">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+              <canvas id="picker_result" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <script>
-    let url =
-      "https://sheet.best/api/sheets/eaab0685-5d64-4d70-92fc-32f1c3f4b11c";
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        // Do something with the data
-        const cls = json.filter(color => color.colorCoordinate).map(color => String(color.colorCoordinate).split(";"));
-        console.log(cls)
-        const picker = new Picker(document.getElementById('picker_result'), {
-          colors: cls
+    <script>
+      let url =
+        "https://sheet.best/api/sheets/eaab0685-5d64-4d70-92fc-32f1c3f4b11c";
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          // Do something with the data
+          const cls = json
+            .filter((color) => color.colorCoordinate)
+            .map((color) => String(color.colorCoordinate).split(";"));
+          console.log(cls);
+          const picker = new Picker(document.getElementById("picker_result"), {
+            colors: cls,
+          });
+          const spinner = document.getElementById("spinner");
+          spinner.style.opacity = 0;
+          setTimeout(function () {
+            spinner.style.display = "none";
+          }, 310);
+          picker.draw();
         });
-        picker.draw();
-      });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
