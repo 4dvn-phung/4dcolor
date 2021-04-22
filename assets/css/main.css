@@ -53,8 +53,6 @@ body {
   background-color: #fff;
   display: flex;
   padding: 10px;
-  width: 280px;
-  height: 280px;
 }
 .wrap {
   background-color: #cfcdc9;
@@ -78,9 +76,9 @@ body {
 }
 .container {
   max-width: 1000px;
-  height: 0;
+  height: 80.10680907877169vh;
   width: 100%;
-  padding-bottom: 43.48%;
+  max-height: 600px;
   margin: 0 auto;
   position: relative;
   background-image: url("../images/background_pc@2x.png");
@@ -128,6 +126,10 @@ body {
   transform: translate(-50%, -50%);
   opacity: 1;
   transition: opacity 0.3s ease;
+}
+#color-picker {
+  width: 280px;
+  height: 280px;
 }
 .ellipsis {
   width: 16px;
@@ -221,6 +223,9 @@ body {
   animation-delay: 0s;
   background: #abbd81;
 }
+.background {
+  display: none;
+}
 @keyframes spinner {
   0% {
     opacity: 1;
@@ -236,30 +241,45 @@ body {
 }
 
 @media screen and (max-width: 640px) {
+  .wrap {
+    position: absolute;
+    min-height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   .wrapper-button {
     margin-top: 15px;
   }
-  .wrapper-picker {
+  .wrapper-picker,
+  #color-picker {
     width: 200px;
     height: 200px;
   }
   .wrapper-description {
+    margin-top: 50%;
     margin-bottom: 0;
     position: absolute;
     top: 50%;
-    right: -16.34%;
-    transform: rotate(90deg) translateY(-10.2em);
+    right: 15px;
+    transform: rotate(90deg);
+    transform-origin: right center;
+  }
+  .description {
+    white-space: nowrap;
   }
   .description br {
     display: none;
   }
-  #color-picker {
-    width: 100%;
+  .background {
+    display: block;
+    max-width: 100%;
   }
   .container {
-    background-image: url("../images/background_sp@2x.png");
-    padding-bottom: 0;
-    height: calc(100vh - 50px);
+    background-image: none;
+    height: auto;
     border-radius: 15px;
+    align-self: center;
   }
 }
