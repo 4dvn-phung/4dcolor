@@ -86,7 +86,11 @@
           messageText.innerHTML = "Thank you!";
           message.style.display = "flex";
         }
-        formConfirm.style.display = "none"; // hide form
+        formConfirm.style.opacity = 0;
+        formConfirm.style.transform = "scale(0)";
+        setTimeout(function () {
+          formConfirm.style.display = "none"; // hide form
+        }, 310);
       }
     };
     // url encode form data for sending as post data
@@ -140,7 +144,7 @@
   }
 
   function resetPicker() {
-    const picker = new Picker(document.getElementById('color-picker'));
+    const picker = new Picker(document.getElementById("color-picker"));
     picker.draw();
   }
 
