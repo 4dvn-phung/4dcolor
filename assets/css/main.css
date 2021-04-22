@@ -83,7 +83,7 @@ body {
   padding-bottom: 43.48%;
   margin: 0 auto;
   position: relative;
-  background-image: url("../images/background_pc.png");
+  background-image: url("../images/background_pc@2x.png");
   background-size: cover;
   background-color: currentColor;
   border-radius: 10px;
@@ -237,7 +237,7 @@ body {
     display: none;
   }
   .container {
-    background-image: url("../images/background_sp.png");
+    background-image: url("../images/background_sp@2x.png");
     padding-bottom: 0;
     height: calc(100vh - 50px);
     border-radius: 15px;
