@@ -282,4 +282,7 @@ body {
     border-radius: 15px;
     align-self: center;
   }
+  .container--middle {
+    align-self: flex-start;
+  }
 }
