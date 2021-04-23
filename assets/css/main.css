@@ -137,7 +137,7 @@ body {
   height: 280px;
 }
 .ellipsis {
-  width: 16px;
+  width: 19px;
   display: none;
 }
 .ellipsis:after {
@@ -273,6 +273,9 @@ body {
     right: 15px;
     transform: rotate(90deg);
     transform-origin: right center;
+  }
+  .ellipsis {
+    width: 15px;
   }
   .description {
     white-space: nowrap;
