@@ -42,7 +42,7 @@
                   <div></div>
                 </div>
               </div>
-              <canvas id="picker_result" />
+              <canvas id="color-picker" />
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
             .filter((color) => color.colorCoordinate)
             .map((color) => String(color.colorCoordinate).split(";"));
           console.log(cls);
-          const picker = new Picker(document.getElementById("picker_result"), {
+          const picker = new Picker(document.getElementById("color-picker"), {
             colors: cls,
           });
           const spinner = document.getElementById("spinner");

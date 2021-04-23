@@ -1,10 +1,22 @@
+const PC_WIDTH = 280; // Only support for this projetc;
+
+const convertToPCCoordinate = ({ x, y, resolution }) => {
+  const newX = x * (PC_WIDTH / resolution);
+  const newY = y * (PC_WIDTH / resolution);
+  return { x: newX, y: newY };
+};
+
+const getAccurate = ({ x = 0, y = 0, resolution }) => {
+  const newX = x * (resolution / PC_WIDTH);
+  const newY = y * (resolution / PC_WIDTH);
+  return { x: newX, y: newY };
+};
+
 window.Picker = (function () {
   class Picker {
     constructor(
       target,
       {
-        width = 280,
-        height = 280,
         pickerCircle = { x: 10, y: 10, size: 6 },
         colors = [], // List [[x,y]]
         hsl = 0,
@@ -13,14 +25,6 @@ window.Picker = (function () {
       this.target = target;
       this.hsl = hsl;
       this.colors = colors;
-      this.width = width;
-      // this.alpha = alpha;
-      this.height = height;
-      this.target.width = width;
-      this.target.height = height;
-      //Get context
-      this.context = this.target.getContext('2d');
-      //Circle
       this.pickerCircle = pickerCircle;
       this.listenForEvents();
     }
@@ -30,12 +34,17 @@ window.Picker = (function () {
     }
 
     drawColorsPoint() {
-      //Circle
-      this.colors.forEach((colorXY) => {
+      //Circles
+      this.colors.forEach(colorXY => {
         if (Array.isArray(colorXY)) {
-          this.drawCircle({
+          const { x, y } = getAccurate({
             x: +colorXY[0],
             y: +colorXY[1],
+            resolution: this.target.width,
+          });
+          this.drawCircle({
+            x,
+            y,
             size: 1,
           });
         }
@@ -45,13 +54,13 @@ window.Picker = (function () {
     drawCircle({ x, y, size = 1 }) {
       this.context.beginPath();
       this.context.arc(x, y, size + 2, 0, Math.PI * 2);
-      this.context.strokeStyle = 'black';
+      this.context.strokeStyle = "black";
       this.context.lineWidth = 2;
       this.context.stroke();
 
       this.context.beginPath();
       this.context.arc(x, y, size, 0, Math.PI * 2);
-      this.context.strokeStyle = 'white';
+      this.context.strokeStyle = "white";
       this.context.lineWidth = 2;
       this.context.stroke();
       // Close path
@@ -59,7 +68,12 @@ window.Picker = (function () {
     }
 
     build() {
-      let gradient = this.context.createLinearGradient(0, 0, this.width, 0);
+      const { width, height } = this.target.getBoundingClientRect();
+      this.target.width = width;
+      this.target.height = height;
+      //Get context
+      this.context = this.target.getContext("2d");
+      let gradient = this.context.createLinearGradient(0, 0, width, 0);
 
       //Color Stops
       gradient.addColorStop(0, `rgb(255, 0, 0, 1.5)`);
@@ -71,21 +85,20 @@ window.Picker = (function () {
       gradient.addColorStop(1, `rgb(255, 0, 0, 1.5)`);
       //Fill it
       this.context.fillStyle = gradient;
-      this.context.fillRect(0, 0, this.width, this.height);
-
+      this.context.fillRect(0, 0, width, height);
       //Apply black and white
-      gradient = this.context.createLinearGradient(0, 0, 0, this.height);
+      gradient = this.context.createLinearGradient(0, 0, 0, height);
       gradient.addColorStop(0, `rgba(0, 0, 0, ${this.hsl})`);
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+      gradient.addColorStop(1, "rgba(0, 0, 0, 1)");
       this.context.fillStyle = gradient;
-      this.context.fillRect(0, 0, this.width, this.height);
+      this.context.fillRect(0, 0, width, height);
 
       // Circles
       this.drawColorsPoint();
     }
 
     listenForEvents() {
-      const onMouseDown = (e) => {
+      const onMouseDown = e => {
         let currentX = e.layerX;
         let currentY = e.layerY;
         this.pickerCircle.x = currentX;
@@ -115,10 +128,14 @@ window.Picker = (function () {
       // };
 
       //Register
-      this.target.addEventListener('mousedown', onMouseDown);
+      this.target.addEventListener("mousedown", onMouseDown);
     }
 
     getPickedColor() {
+      const { x, y } = convertToPCCoordinate({
+        ...this.pickerCircle,
+        resolution: this.target.width,
+      });
       const imageData = this.context.getImageData(
         this.pickerCircle.x,
         this.pickerCircle.y,
@@ -127,7 +144,7 @@ window.Picker = (function () {
       );
       return {
         color: `rgb(${imageData.data[0]}, ${imageData.data[1]}, ${imageData.data[2]})`,
-        coordinate: `${this.pickerCircle.x};${this.pickerCircle.y}`,
+        coordinate: `${x};${y}`,
       };
     }
 
@@ -135,16 +152,5 @@ window.Picker = (function () {
       this.onChangeCallback = callback;
     }
   }
-
-  //   let picker = new Picker(document.getElementById('color-picker'), 450, 220);
-
-  //Draw
-  //   setInterval(() => picker.draw(), 1);
-
-  //   picker.onChange((color) => {
-  //     let selected = document.getElementsByClassName('selected')[0];
-  //     selected.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
-  //   });
-
   return Picker;
 })();
