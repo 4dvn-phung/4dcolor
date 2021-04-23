@@ -3,13 +3,13 @@ const PC_WIDTH = 280; // Only support for this projetc;
 const convertToPCCoordinate = ({ x, y, resolution }) => {
   const newX = x * (PC_WIDTH / resolution);
   const newY = y * (PC_WIDTH / resolution);
-  return { x: newX, y: newY };
+  return { x: newX.toFixed(3), y: newY.toFixed(3) };
 };
 
 const getAccurate = ({ x = 0, y = 0, resolution }) => {
   const newX = x * (resolution / PC_WIDTH);
   const newY = y * (resolution / PC_WIDTH);
-  return { x: newX, y: newY };
+  return { x: newX.toFixed(3), y: newY.toFixed(3) };
 };
 
 window.Picker = (function () {
