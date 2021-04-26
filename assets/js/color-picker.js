@@ -92,8 +92,8 @@ window.Picker = (function () {
         this.pickerCircle.y = currentY;
 
         if (this.onChangeCallback) {
-          this.onChangeCallback(this.getPickedColor());
           this.build();
+          this.onChangeCallback(this.getPickedColor());
           this.drawCircle({
             x: currentX,
             y: currentY,
