@@ -60,6 +60,7 @@
     var data = formData.data;
     var message = document.querySelector(".message");
     var messageText = document.querySelector(".message-text");
+    var ellipsis = document.querySelector(".ellipsis");
     // If a honeypot field is filled, assume it was done so by a spam bot.
     if (formData.honeypot) {
       return false;
@@ -70,6 +71,7 @@
     var url = form.action;
     var xhr = new XMLHttpRequest();
     messageText.innerHTML = "Sending";
+    ellipsis.style.display = "block";
     xhr.open("POST", url);
     // xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -85,8 +87,10 @@
         if (message) {
           messageText.innerHTML = "Thank you!";
           message.style.display = "flex";
+          ellipsis.style.display = "none";
         }
-        formConfirm.style.display = "none"; // hide form
+        formConfirm.style.opacity = 0;
+        formConfirm.style.transform = "scale(0)";
       }
     };
     // url encode form data for sending as post data
@@ -140,7 +144,7 @@
   }
 
   function resetPicker() {
-    const picker = new Picker(document.getElementById('color-picker'));
+    const picker = new Picker(document.getElementById("color-picker"));
     picker.draw();
   }
 

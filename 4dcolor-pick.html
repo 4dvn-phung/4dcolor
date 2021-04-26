@@ -4,73 +4,88 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4D Color Pick</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script type="text/javascript" src="./assets/js/color-picker.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4D Color Pick</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <script type="text/javascript" src="./assets/js/color-picker.js"></script>
-</head>
-
-<body>
-  <div class="wrap">
-    <div class="wrapper-description">
-      <p class="description">
-        Please pick the color of <br />FOURDIGIT that you feel. <br />Don’t
-        think, just feel!
-      </p>
-    </div>
-    <div id="simulation" class="container">
-      <div class="wrapper-inner">
-        <div class="inner">
-          <div class="wrapper-picker">
-            <canvas id="color-picker" width=280 height=280></canvas>
-            <div class="message">
-              <h2 class="message-text">Thank you!</h2>
+  <body>
+    <div class="wrap">
+      <div class="wrapper-description">
+        <p class="description">
+          Please pick the color of <br />FOURDIGIT that you feel. <br />Don’t
+          think, just feel!
+        </p>
+      </div>
+      <div id="simulation" class="container">
+        <img
+          class="background"
+          src="./assets/images/background_sp@2x.png"
+          alt="background"
+        />
+        <div class="wrapper-inner">
+          <div class="inner">
+            <div class="wrapper-picker">
+              <canvas id="color-picker"></canvas>
+              <div class="message">
+                <h2 class="message-text">Thank you!</h2>
+                <span class="ellipsis"></span>
+              </div>
             </div>
+            <form
+              class="gform"
+              method="POST"
+              action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
+              data-email="phungnc@4digit.com"
+            >
+              <input id="colorInput" name="colorInput" type="hidden" />
+              <input
+                id="colorCoordinate"
+                name="colorCoordinate"
+                type="hidden"
+              />
+              <div id="fSubmitConfirm" class="wrapper-button">
+                <button id="submitConfirm" type="button" disabled>
+                  Submit
+                </button>
+              </div>
+              <div id="fConfirm" class="wrapper-button">
+                <button id="fButtonCancel" type="button">Cancel</button>
+                <button type="submit">OK</button>
+              </div>
+            </form>
           </div>
-          <form class="gform" method="POST"
-            action="https://script.google.com/macros/s/AKfycbyttn_NB5t2OdOCBX9b3FB394nDwhbkddC_aRbq6ZKWgRkHtokq8jFzsTEkI9Lskhb5/exec"
-            data-email="phungnc@4digit.com">
-            <input id="colorInput" name="colorInput" type="hidden" />
-            <input id="colorCoordinate" name="colorCoordinate" type="hidden" />
-            <div id="fSubmitConfirm" class="wrapper-button">
-              <button id="submitConfirm" type="button" disabled>
-                Submit
-              </button>
-            </div>
-            <div id="fConfirm" class="wrapper-button">
-              <button id="fButtonCancel" type="button">Cancel</button>
-              <button type="submit">OK</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    const picker = new Picker(document.getElementById('color-picker'));
-    picker.draw();
+    <script>
+      const picker = new Picker(document.getElementById("color-picker"));
+      picker.draw();
 
-    const colorPick = document.getElementById("colorInput");
-    const colorCoordinate = document.getElementById("colorCoordinate");
-    const colorSimulation = document.getElementById("simulation");
-    colorSimulation.style.backgroundColor = '#00486e';
+      const colorPick = document.getElementById("colorInput");
+      const colorCoordinate = document.getElementById("colorCoordinate");
+      const colorSimulation = document.getElementById("simulation");
+      colorSimulation.style.backgroundColor = "#00486e";
 
-    picker.onChange(function (colorData) {
-      console.log(colorData);
-      colorPick.value = colorData.color;
-      colorCoordinate.value = colorData.coordinate;
-      colorSimulation.style.backgroundColor = colorData.color;
-      document.getElementById("submitConfirm").disabled = false;
-    })
-  </script>
-  <!-- Submit the Form to Google Using "AJAX" -->
-  <script data-cfasync="false" type="text/javascript" src="./assets/js/form-submission-handler.js"></script>
-</body>
-
+      picker.onChange(function (colorData) {
+        console.log(colorData);
+        colorPick.value = colorData.color;
+        colorCoordinate.value = colorData.coordinate;
+        colorSimulation.style.backgroundColor = colorData.color;
+        document.getElementById("submitConfirm").disabled = false;
+      });
+    </script>
+    <!-- Submit the Form to Google Using "AJAX" -->
+    <script
+      data-cfasync="false"
+      type="text/javascript"
+      src="./assets/js/form-submission-handler.js"
+    ></script>
+  </body>
 </html>
